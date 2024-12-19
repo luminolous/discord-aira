@@ -1,0 +1,56 @@
+{
+    "intents": [
+      {
+        "tag": "selamat_pagi",
+        "patterns": ["Selamat pagi", "Pagi", "Good morning", "Morning"],
+        "responses": ["Selamat pagi! Semoga harimu menyenangkan.", "Pagi! Apa kabar hari ini?"],
+        "context_set": ""
+      },
+      {
+        "tag": "selamat_malam",
+        "patterns": ["Selamat malam", "Malam", "Good night", "Night"],
+        "responses": ["Selamat malam! Semoga mimpi indah.", "Malam! Sudah siap untuk istirahat?"],
+        "context_set": ""
+      },
+      {
+        "tag": "selamat_siang",
+        "patterns": ["Selamat siang", "Siang", "Good afternoon", "Afternoon"],
+        "responses": ["Selamat siang! Semoga harimu berjalan lancar.", "Siang! Apa rencanamu hari ini?"],
+        "context_set": ""
+      },
+      {
+        "tag": "sapaan",
+        "patterns": ["Halo", "Hai", "Hi", "Apa kabar?", "Hello"],
+        "responses": ["Halo! Apa yang bisa saya bantu?", "Hai! Senang bertemu denganmu."],
+        "context_set": ""
+      },
+      {
+        "tag": "menanyakan_kabar",
+        "patterns": ["Bagaimana kabarmu?", "Apa kabarmu?", "Kamu baik-baik saja?", "Gimana kabarmu?"],
+        "responses": ["Saya baik-baik saja, terima kasih! Bagaimana denganmu?", "Saya selalu siap membantu, kabar saya baik!"],
+        "context_set": ""
+      },
+      {
+        "tag": "menanya_cuaca",
+        "patterns": ["Bagaimana cuaca hari ini?", "Apa cuaca hari ini?", "Apakah akan hujan hari ini?", "Cuaca sekarang bagaimana?"],
+        "responses": ["Saya tidak bisa mengecek cuaca secara langsung, tapi kamu bisa mencoba aplikasi cuaca untuk info lebih akurat.", "Semoga cuacanya mendukung kegiatanmu hari ini!"],
+        "context_set": ""
+      },
+      {
+        "tag": "pantun",
+        "patterns": ["Beri saya pantun", "Ceritakan pantun", "Pantun lucu dong", "Pantun apa saja"],
+        "responses": [
+          "Buah mangga buah durian,\nJangan lupa sarapan pagi,\nKalau teman selalu sopan,\nHati senang banyak rezeki!",
+          "Ada udang di balik batu,\nAda cinta di hatiku,\nKalau kamu butuh bantu,\nAku selalu ada untukmu."
+        ],
+        "context_set": ""
+      },
+      {
+        "tag": "bilangan_acak",
+        "patterns": ["Berikan bilangan acak", "Angka acak dong", "Tolong beri angka dari 1 sampai 100", "Bilangan acak berapa?"],
+        "responses": ["Angka acakmu adalah {random_number}.", "Saya memilih angka {random_number} untukmu.", "Bagaimana kalau angkanya {random_number}?"],
+        "context_set": ""
+      }
+    ]
+  }
+  
