@@ -3,45 +3,37 @@ import json
 import torch
 from training.modulo import NeuralNet
 from training.train import bag_of_words, tokenize
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
 def get_responses(user_input: str) -> str:
     lowered: str = user_input.lower()
 
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # Load GPT-2 model and tokenizer
+    model_name = "gpt2"
+    tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+    model = GPT2LMHeadModel.from_pretrained(model_name)
 
-    with open('intents.json', 'r') as f:
-        intents = json.load(f)
-
-    FILE = "data.pth"
-    data = torch.load(FILE, weights_only=True)
-
-    input_size = data["input_size"]
-    hidden_size = data["hidden_size"]
-    output_size = data["output_size"]
-    all_words = data["all_words"]
-    tags = data["tags"]
-    model_state = data["model_state"]
-
-    model = NeuralNet(input_size, hidden_size, output_size).to(device)
-    model.load_state_dict(model_state)
-    model.eval()
+    with open("intents.json", "r") as file:
+        intents = json.load(file)
 
     while True:
-        lowered = tokenize(lowered)
-        x = bag_of_words(lowered, all_words)
-        x = x.reshape(1, x.shape[0])
-        x = torch.from_numpy(x)
+        user_input = input("You: ")
 
-        output = model(x)
-        _, predicted = torch.max(output, dim=1)
-        tag = tags[predicted.item()]
+        intent_tag = "unknown"
+        for intent in intents["intents"]:
+            for pattern in intent["patterns"]:
+                if pattern.lower() in user_input.lower():
+                    intent_tag = intent["tag"]
+                    break
+            if intent_tag != "unknown":
+                break
 
-        probs = torch.softmax(output, dim=1)
-        prob = probs[0][predicted.item()]
+        response = "I'm sorry, I didn't understand that."
+        for intent in intents["intents"]:
+            if intent["tag"] == intent_tag:
+                response = torch.choice(intent["responses"])
+                break
 
-        if prob.item() > 0.75:
-            for intent in intents["intents"]:
-                if tag == intent["tag"]:
-                    return f"{random.choice(intent['responses'])}"
+        print(f"{response}")
 
-        else:
-            return f"I do not understand..."
+
